@@ -57,12 +57,29 @@
     color: #333;
     text-decoration: none;
     transition: color 0.3s;
+    position: relative;
   }
   
   .nav a:hover {
     color: #4caf50;
   }
   
+  .nav a::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0%;
+    background-color: #4caf50;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+  }
+  
+  .nav a:hover::after {
+    width: 100%;
+  }
+
   /* SECTION HERO AVEC OVERLAY */
   .hero {
     position: relative;
@@ -73,14 +90,24 @@
   }
   
   .overlay {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.55);
     padding: 40px;
+    border-radius: 10px;
   }
   
   .overlay h1,
   .overlay h2,
   .overlay p {
     color: white;
+  }
+
+  .overlay p {
+    font-size: 1.1em;
+  }
+
+  .overlay h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
   }
   
   /* CONTENU CENTRAL */
@@ -92,7 +119,7 @@
   /* FOOTER FIXÉ EN BAS */
   footer {
     background-color: #f4f4f4;
-    padding: 10px 20px;
+    padding: 6px 10px;
     font-size: 0.9em;
     text-align: center;
     color: #333;
@@ -103,6 +130,25 @@
   img[title] {
     cursor: help;
   }
+
+  img[title]::after {
+    content: attr(title);
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.75em;
+    padding: 5px 8px;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+    white-space: nowrap;
+    display: none;
+  }
+  
+  img[title]:hover::after {
+    display: block;
+  }
+  
   
   /* LIENS UTILES */
   .links {
@@ -118,5 +164,26 @@
   
   .links a:hover {
     text-decoration: underline;
+  }
+  
+
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 1.6em;
+    }
+  
+    .nav {
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1em;
+    }
+  
+    .overlay {
+      padding: 20px;
+    }
+  
+    footer {
+      font-size: 0.75em;
+    }
   }
   
