@@ -1,49 +1,122 @@
-/* style.css */
-
-body {
-    font-family: Arial, sans-serif;
+/* Reset de base */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
-    color: #333;
+    box-sizing: border-box;
   }
   
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-image: url('../images/plaine.jpg'); /* Remplace par le chemin de ton image */
+  background-size: cover; /* Cela va redimensionner l'image pour couvrir tout l'écran */
+  background-position: center; /* Cela place l'image au centre */
+  background-attachment: fixed; /* Cela va rendre l'image fixe lors du défilement */
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fefefe;
+  }
+  
+  /* HEADER AVEC BACKGROUND ANIMÉ */
   header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem;
+    padding: 20px;
     text-align: center;
+    color: white;
+    animation: gradientBG 10s ease infinite;
+    background: linear-gradient(-45deg, #3ab941, #50c556, #1abb1f, #06a50e);
+    background-size: 400% 400%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
   
-  nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0 0 0;
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* MENU DE NAVIGATION */
+  .nav {
+    background-color: rgba(255, 255, 255, 0.85);
     display: flex;
     justify-content: center;
-    gap: 2rem;
-  }
-  
-  nav a {
-    color: white;
-    text-decoration: none;
+    gap: 30px;
+    padding: 15px;
     font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 1px solid #ccc;
   }
   
-  main {
-    padding: 2rem;
-    max-width: 800px;
-    margin: auto;
+  .nav a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
   }
   
-  footer {
-    background-color: #eee;
-    color: #666;
-    text-align: center;
-    padding: 1rem;
+  .nav a:hover {
+    color: #4caf50;
+  }
+  
+  /* SECTION HERO AVEC OVERLAY */
+  .hero {
     position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 3rem;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 60px 20px;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+  }
+  
+  .overlay h1,
+  .overlay h2,
+  .overlay p {
+    color: white;
+  }
+  
+  /* CONTENU CENTRAL */
+  main {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  /* FOOTER FIXÉ EN BAS */
+  footer {
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+    font-size: 0.9em;
+    text-align: center;
+    color: #333;
+    border-top: 1px solid #ccc;
+  }
+  
+  /* IMAGE DU LOGO AB AVEC TOOLTIP */
+  img[title] {
+    cursor: help;
+  }
+  
+  /* LIENS UTILES */
+  .links {
+    margin-top: 20px;
+  }
+  
+  .links a {
+    display: block;
+    color: #4caf50;
+    margin-bottom: 5px;
+    text-decoration: none;
+  }
+  
+  .links a:hover {
+    text-decoration: underline;
   }
   
