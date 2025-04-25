@@ -186,4 +186,71 @@
       font-size: 0.75em;
     }
   }
+
+  /* GALERIE PHOTO */
+.galerie {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .galerie img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+  }
+  
+  .galerie img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* BOUTON À GAUCHE FIXÉ EN HAUT */
+/* Style du bouton de retour */
+.retour-accueil {
+    position: absolute; /* Fixe le bouton à gauche de la page */
+    left: 20px; /* Marge à gauche */
+    top: 50%; /* Centré verticalement */
+      z-index: 10; /* pour être bien au-dessus si besoin */
+    transform: translateY(-50%); /* Décale le bouton pour un meilleur centrage */
+  }
+
+  .btn-retour {
+    display: inline-block;
+    padding: 10px 14px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-retour:hover {
+    background-color: #3a943f;
+  }
+
+  .header-galerie {
+    position: relative;
+    background: linear-gradient(-45deg, #3ab941, #50c556, #1abb1f, #06a50e);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    min-height: 120px;
+    padding: 20px 0;
+  }
+  
+  /* CONTENEUR CENTRÉ POUR LES TEXTES */
+/* Container du texte au centre du header */
+.header-texte {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
   
