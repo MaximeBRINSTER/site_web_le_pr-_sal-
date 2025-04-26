@@ -243,7 +243,7 @@
     color: white;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     min-height: 120px;
-    padding: 20px 0;
+    padding: 20px 0px;
   }
   
   /* CONTENEUR CENTRÉ POUR LES TEXTES */
@@ -314,4 +314,68 @@
   .galerie img {
     pointer-events: none; /* Désactive l'interaction avec les images */
 }
+}
+
+
+/* HEADER DE LA PAGE PRODUITS */
+.header-produits {
+  position: relative;
+  padding: 20px 40px;
+  background: linear-gradient(-45deg, #3ab941, #50c556, #1abb1f, #06a50e);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: white;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centre le texte */
+}
+
+/* Bouton retour à gauche */
+.retour-accueil {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Bouton admin à droite */
+.admin-acces {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Texte centré */
+.header-texte {
+  text-align: center;
+}
+
+.header-texte h1 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+}
+
+.header-texte p {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+/* Styles des boutons */
+.btn-retour, .btn-admin {
+  display: inline-block;
+  padding: 10px 14px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-retour:hover, .btn-admin:hover {
+  background-color: #3a943f;
 }
