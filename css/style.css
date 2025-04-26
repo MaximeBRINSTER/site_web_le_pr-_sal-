@@ -311,4 +311,7 @@
       flex-direction: column;      /* Empile les images sur une seule colonne */
       align-items: center;         /* Centre les images verticalement si elles sont empilées */
   }
+  .galerie img {
+    pointer-events: none; /* Désactive l'interaction avec les images */
+}
 }
