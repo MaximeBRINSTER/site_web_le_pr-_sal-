@@ -36,5 +36,49 @@
         <i class="fa-solid fa-map-location-dot"></i> Ferme Le Pré Salé – 123 chemin des Lavandes, 12345 Campagne<br>
         <i class="fa-solid fa-phone"></i> 06 30 87 57 48   –   <i class="fa-solid fa-at"></i> contact@lepresale.fr
       </footer>
+          <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Connexion Administrateur</h3>
+            <form action="login.php" method="POST">
+                <label for="adminUsername">Identifiant :</label>
+                <input type="text" id="adminUsername" name="username" required>
+
+                <label for="adminPassword">Mot de passe :</label>
+                <input type="password" id="adminPassword" name="password" required>
+
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Récupérer la modale
+        var adminModal = document.getElementById("adminLoginModal");
+
+        // Récupérer le bouton qui ouvre la modale (votre bouton existant)
+        var adminBtn = document.querySelector(".btn-admin"); // Sélection par la classe
+
+        // Récupérer l'élément <span> (x) qui ferme la modale
+        var adminSpan = adminModal.getElementsByClassName("close")[0];
+
+        // Quand l'utilisateur clique sur le bouton, ouvrir la modale
+        adminBtn.onclick = function(event) {
+            event.preventDefault(); // Empêche le comportement par défaut du lien (navigation vers admin.html)
+            adminModal.style.display = "flex"; // Utilise flex pour le centrage des éléments
+        }
+
+        // Quand l'utilisateur clique sur <span> (x), fermer la modale
+        adminSpan.onclick = function() {
+            adminModal.style.display = "none";
+        }
+
+        // Quand l'utilisateur clique n'importe où en dehors de la modale, la fermer
+        window.onclick = function(event) {
+            if (event.target == adminModal) {
+                adminModal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>

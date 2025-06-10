@@ -379,3 +379,119 @@
 .btn-retour:hover, .btn-admin:hover {
   background-color: #3a943f;
 }
+
+.modal {
+            display: none; /* Masquée par défaut */
+            position: fixed; /* Reste en place */
+            z-index: 1; /* Par-dessus tout le reste */
+            left: 0;
+            top: 0;
+            width: 100%; /* Largeur totale */
+            height: 100%; /* Hauteur totale */
+            overflow: auto; /* Permet le défilement si nécessaire */
+            background-color: rgb(0,0,0); /* Couleur de secours */
+            background-color: rgba(0,0,0,0.4); /* Noir avec opacité */
+            display: flex; /* Utilise flexbox pour centrer */
+            justify-content: center; /* Centre horizontalement */
+            align-items: center; /* Centre verticalement */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 30px; /* Augmenté pour plus d'espace */
+            border: 1px solid #888;
+            width: 320px; /* Légèrement plus large */
+            border-radius: 10px; /* Coins plus arrondis */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
+            position: relative; /* Pour positionner la croix de fermeture */
+            text-align: center; /* Centrer le contenu du modal */
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute; /* Positionne la croix */
+            top: 10px;
+            right: 15px;
+            font-size: 32px; /* Plus grande */
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Styles pour le formulaire dans la modale */
+        .modal-content h3 {
+            color: #333;
+            margin-bottom: 25px; /* Plus d'espace sous le titre */
+            font-size: 24px;
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px; /* Espacement entre les éléments du formulaire */
+        }
+
+        .modal-content label {
+            text-align: left;
+            font-weight: bold;
+            color: #555;
+            font-size: 15px;
+            margin-bottom: -10px; /* Remonte le label */
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            width: calc(100% - 24px); /* Prend toute la largeur moins le padding */
+            box-sizing: border-box; /* Inclut padding et border dans la largeur */
+        }
+
+        .modal-content button[type="submit"] {
+            background-color: #28a745; /* Vert pour le bouton de connexion */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px; /* Espace au-dessus du bouton */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .modal-content button[type="submit"]:hover {
+            background-color: #218838; /* Vert plus foncé au survol */
+            transform: translateY(-1px); /* Léger soulèvement */
+        }
+
+        /* Styles du bouton admin */
+        .btn-admin {
+            display: inline-block;
+            padding: 12px; /* Augmenté légèrement */
+            font-size: 26px; /* Icône plus grande */
+            color: #fff;
+            background-color: #28a745; /* Vert vibrant pour le bouton */
+            border-radius: 50%;
+            width: 55px; /* Plus grand */
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-admin:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
