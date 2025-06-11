@@ -172,25 +172,8 @@
           <th>Quantité disponible</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Miel de Lavande</td>
-          <td>Pot de 250g, récolte 2024</td>
-          <td>7 €</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>Œufs frais</td>
-          <td>Boîte de 6 œufs de poules élevées en plein air</td>
-          <td>3 €</td>
-          <td>24</td>
-        </tr>
-        <tr>
-          <td>Pommes</td>
-          <td>1kg de pommes bio Gala</td>
-          <td>2,50 €</td>
-          <td>30</td>
-        </tr>
+      <tbody id="produits-body">
+        
       </tbody>
     </table>
   </section>
@@ -350,6 +333,55 @@
   window.onload = function () {
     loadQuantities();
   };
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB9dtKNUTRrQEy_NOwku0PuGIotaSAHDm8",
+    authDomain: "lepre-sale.firebaseapp.com",
+    projectId: "lepre-sale",
+    storageBucket: "lepre-sale.appspot.com",
+    messagingSenderId: "514631411842",
+    appId: "1:514631411842:web:6f9fb26cf6d9f46c306c9b",
+    databaseURL: "https://lepre-sale-default-rtdb.europe-west1.firebasedatabase.app"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const produitsRef = ref(db, "produits");
+
+  const tbody = document.getElementById("produits-body");
+
+  onValue(produitsRef, (snapshot) => {
+    const produits = snapshot.val();
+    tbody.innerHTML = ""; // Clear le tableau
+
+    let index = 0;
+    for (const key in produits) {
+      const p = produits[key];
+      const row = document.createElement("tr");
+
+      // Ajoute les 4 colonnes
+      row.innerHTML = `
+        <td>${p.nom}</td>
+        <td>${p.description}</td>
+        <td>${p.prix}</td>
+        <td class="quantite-cell">${p.quantite}</td>
+      `;
+
+      tbody.appendChild(row);
+      index++;
+    }
+
+    // Recharge les quantités du localStorage si admin activé
+    if (typeof loadQuantities === "function") {
+      loadQuantities();
+    }
+  });
 </script>
 
 
