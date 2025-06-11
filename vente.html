@@ -204,45 +204,154 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Connexion Administrateur</h3>
-            <form action="login.php" method="POST">
-                <label for="adminUsername">Identifiant :</label>
-                <input type="text" id="adminUsername" name="username" required>
 
-                <label for="adminPassword">Mot de passe :</label>
-                <input type="password" id="adminPassword" name="password" required>
+<label for="adminPassword">Mot de passe :</label>
+<input type="password" id="adminPassword" required>
 
-                <button type="submit">Se connecter</button>
-            </form>
+<button id="loginBtn">Se connecter</button>
+<p id="loginError" style="color: red; display: none;">Mot de passe incorrect</p>
+
+
         </div>
     </div>
 
     <script>
-        // Récupérer la modale
-        var adminModal = document.getElementById("adminLoginModal");
+  const adminBtn = document.querySelector('.btn-admin');
+  const adminModal = document.getElementById('adminLoginModal');
+  const closeModal = adminModal.querySelector('.close');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginError = document.getElementById('loginError');
+  const adminPasswordInput = document.getElementById('adminPassword');
+  let isAdmin = false;
 
-        // Récupérer le bouton qui ouvre la modale (votre bouton existant)
-        var adminBtn = document.querySelector(".btn-admin"); // Sélection par la classe
+  // Identifiants de connexion (ex: admin123)
+  const ADMIN_PASSWORD = 'lepresale64@';
 
-        // Récupérer l'élément <span> (x) qui ferme la modale
-        var adminSpan = adminModal.getElementsByClassName("close")[0];
+  // Restaure les quantités depuis localStorage
+  function loadQuantities() {
+    const saved = JSON.parse(localStorage.getItem('produitQuantites') || '{}');
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach((row, i) => {
+      if (saved[i]) {
+        row.cells[3].textContent = saved[i];
+      }
+    });
+  }
 
-        // Quand l'utilisateur clique sur le bouton, ouvrir la modale
-        adminBtn.onclick = function(event) {
-            event.preventDefault(); // Empêche le comportement par défaut du lien (navigation vers admin.html)
-                adminModal.classList.add("is-visible"); // <-- Ajoute la classe
-        }
+  // Sauvegarde les quantités dans localStorage
+  function saveQuantities() {
+    const rows = document.querySelectorAll('tbody tr');
+    const saved = {};
+    rows.forEach((row, i) => {
+      const input = row.cells[3].querySelector('input');
+      saved[i] = input ? input.value : row.cells[3].textContent;
+    });
+    localStorage.setItem('produitQuantites', JSON.stringify(saved));
+  }
 
-        // Quand l'utilisateur clique sur <span> (x), fermer la modale
-        adminSpan.onclick = function() {
-              adminModal.classList.remove("is-visible"); // <-- Supprime la classe
-        }
+  // Activer édition des quantités
+  function enableEdition() {
+    isAdmin = true;
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const cell = row.cells[3];
+      const currentQty = cell.textContent.trim();
+      cell.innerHTML = `<input type="number" value="${currentQty}" min="0" style="width: 60px;">`;
+    });
 
-        // Quand l'utilisateur clique n'importe où en dehors de la modale, la fermer
-        window.onclick = function(event) {
-            if (event.target == adminModal) {
-        adminModal.classList.remove("is-visible"); // <-- Supprime la classe
-                    }
-        }
-    </script>
+    const saveBtn = document.createElement('button');
+    saveBtn.id = 'saveBtn';
+    saveBtn.textContent = '💾 Sauvegarder';
+    Object.assign(saveBtn.style, {
+      marginTop: '20px',
+      padding: '10px 20px',
+      fontSize: '16px',
+      backgroundColor: '#007BFF',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      marginRight: '10px'
+    });
+
+    saveBtn.onclick = () => {
+      saveQuantities();
+      alert('✅ Quantités sauvegardées localement !');
+    };
+
+    const logoutBtn = document.createElement('button');
+    logoutBtn.id = 'logoutBtn';
+    logoutBtn.textContent = '🔒 Déconnexion';
+    Object.assign(logoutBtn.style, {
+      marginTop: '20px',
+      padding: '10px 20px',
+      fontSize: '16px',
+      backgroundColor: '#dc3545',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer'
+    });
+
+    logoutBtn.onclick = () => {
+      disableEdition();
+    };
+
+    const section = document.querySelector('.produits');
+    section.appendChild(saveBtn);
+    section.appendChild(logoutBtn);
+  }
+
+  // Désactiver le mode admin
+  function disableEdition() {
+    isAdmin = false;
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const input = row.cells[3].querySelector('input');
+      if (input) {
+        row.cells[3].textContent = input.value;
+      }
+    });
+    document.getElementById('saveBtn')?.remove();
+    document.getElementById('logoutBtn')?.remove();
+  }
+
+  // --- Gestion modale admin ---
+  adminBtn.onclick = function (e) {
+    e.preventDefault();
+    adminModal.classList.add('is-visible');
+  };
+
+  closeModal.onclick = function () {
+    adminModal.classList.remove('is-visible');
+    loginError.style.display = 'none';
+  };
+
+  window.onclick = function (event) {
+    if (event.target == adminModal) {
+      adminModal.classList.remove('is-visible');
+      loginError.style.display = 'none';
+    }
+  };
+
+  loginBtn.onclick = function () {
+    const password = adminPasswordInput.value;
+    if (password === ADMIN_PASSWORD) {
+      adminModal.classList.remove('is-visible');
+      adminPasswordInput.value = '';
+      loginError.style.display = 'none';
+      enableEdition();
+    } else {
+      loginError.style.display = 'block';
+    }
+  };
+
+  // Charger les quantités dès que la page est prête
+  window.onload = function () {
+    loadQuantities();
+  };
+</script>
+
+
 </body>
 </html>
